@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "description": "Creates a component directory",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm -r dist && mkdir dist",
+    "build": "babel src -d dist",
+    "clean-build": "npm run clean && npm run build",
   },
   "author": "JavaScript Playground",
   "license": "ISC",
   "preferGlobal": true,
   "bin": {
-    "compcomp": "index.js"
+    "react-pod": "dist/index.js"
+  },
+  "dependencies": {
+    "moustache": "0.0.2"
   }
 }
