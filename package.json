@@ -1,6 +1,6 @@
 {
   "name": "react-pod",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Creates a React component pod",
   "scripts": {
     "test": "mocha --require babel-register",
