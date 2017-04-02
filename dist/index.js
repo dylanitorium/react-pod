@@ -13,78 +13,33 @@ var _mustache = require('mustache');
 
 var _mustache2 = _interopRequireDefault(_mustache);
 
+var _ArgumentHelper = require('./helpers/ArgumentHelper');
+
+var _ArgumentHelper2 = _interopRequireDefault(_ArgumentHelper);
+
+var _ErrorHandler = require('./helpers/ErrorHandler');
+
+var _ErrorHandler2 = _interopRequireDefault(_ErrorHandler);
+
+var _PathHelper = require('./helpers/PathHelper');
+
+var _PathHelper2 = _interopRequireDefault(_PathHelper);
+
+var _AssetHelper = require('./helpers/AssetHelper');
+
+var _AssetHelper2 = _interopRequireDefault(_AssetHelper);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
-* Functions
-* =========
-*/
-var throwError = function throwError(message) {
-  console.error('Error: ' + message);
-  process.exit(1);
-};
-
-var getTemplate = function getTemplate(templatePath) {
-  return new Promise(function (resolve, reject) {
-    return _fs2.default.readFile(templatePath, 'utf8', function (error, template) {
-      console.log(template);
-      return error ? reject(error) : resolve(template);
-    });
-  });
-};
-
-var populateTemplate = function populateTemplate(data) {
-  return function (template) {
-    return _mustache2.default.render(template, data);
-  };
-};
-
-var createAsset = function createAsset(data, templatePath) {
-  return getTemplate(templatePath).then(populateTemplate(data)).catch(throwError);
-};
-
-var writeAsset = function writeAsset(path) {
-  return function (content) {
-    return new Promise(function (resolve, reject) {
-      return _fs2.default.writeFile(path, content, function (error) {
-        return error ? reject(error) : resolve();
-      });
-    });
-  };
-};
-
-var getComponentPath = function getComponentPath(name) {
-  return name + '/' + name + '.js';
-};
-var getStylePath = function getStylePath(name, nameLower) {
-  return name + '/' + nameLower + '.css';
-};
-var getIndexPath = function getIndexPath(name) {
-  return name + '/index.js';
-};
-
-/**
-* Application
-* ===========
-*/
-var argument = process.argv[2];
-if (!argument) {
-  error('You didn\'t specify a pod name');
-}
-
-var component = (0, _capitalize2.default)(argument);
-var style = argument.toLowerCase();
-var data = {
-  component: component,
-  style: style
-};
+var data = _ArgumentHelper2.default.parseArguments(process);
+var component = data.component;
 
 if (_fs2.default.existsSync(component)) {
-  throwError('A directory with the name you have chosen already exists');
+  _ErrorHandler2.default.throwError(process)('A directory with the name you have chosen already exists');
 }
 
 _fs2.default.mkdirSync(component);
 
-Promise.all([createAsset(data, 'templates/component.js.mst').then(writeAsset(getComponentPath(component))), createAsset(data, 'templates/index.js.mst').then(writeAsset(getIndexPath(component))), createAsset(data, 'templates/style.css.mst').then(writeAsset(getStylePath(component, style)))]).then(function () {
+Promise.all([_AssetHelper2.default.createAsset(data, 'templates/component.js.mst').then(_AssetHelper2.default.writeAsset(_PathHelper2.default.getComponentPath(data))), _AssetHelper2.default.createAsset(data, 'templates/index.js.mst').then(_AssetHelper2.default.writeAsset(_PathHelper2.default.getIndexPath(data))), _AssetHelper2.default.createAsset(data, 'templates/style.css.mst').then(_AssetHelper2.default.writeAsset(_PathHelper2.default.getStylePath(data)))]).then(function () {
   return process.exit();
-});
+}).catch(_ErrorHandler2.default.throwError(process));
