@@ -1,12 +1,19 @@
 {
-  "name": "compcomp",
+  "name": "react-pod",
   "version": "1.0.0",
-  "description": "Creates a component directory",
+  "description": "Creates a React component pod",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -r dist && mkdir dist",
     "build": "babel src -d dist",
-    "clean-build": "npm run clean && npm run build",
+    "clean-build": "npm run clean && npm run build"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0",
+      "react"
+    ]
   },
   "author": "JavaScript Playground",
   "license": "ISC",
@@ -15,6 +22,14 @@
     "react-pod": "dist/index.js"
   },
   "dependencies": {
-    "moustache": "0.0.2"
+    "capitalize": "^1.0.0",
+    "lcfirst": "^1.0.0",
+    "mustache": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0"
   }
 }
