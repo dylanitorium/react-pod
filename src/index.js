@@ -17,8 +17,6 @@ if (fs.existsSync(component)) {
 
 fs.mkdirSync(component);
 
-
-
 Promise.all([
   AssetHelper.createAsset(data, 'templates/component.js.mst')
     .then(

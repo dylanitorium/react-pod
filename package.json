@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -r dist && mkdir dist",
-    "build": "babel src -d dist",
+    "build": "babel src --out-file dist/index.js",
     "clean-build": "npm run clean && npm run build"
   },
   "babel": {
@@ -18,6 +18,7 @@
   "author": "JavaScript Playground",
   "license": "ISC",
   "preferGlobal": true,
+  "main": "dist/index.js",
   "bin": {
     "react-pod": "dist/index.js"
   },
