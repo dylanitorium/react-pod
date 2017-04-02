@@ -3,22 +3,13 @@
 This is a basic command-line tool to assist with boilerplating React Pods. Pod is a term
 borrowed from Ember.js but also aptly describes the file configuration here.
 
-```
-Component
---Component.js
---index.js
---component.js
-```
-
 ## Installation
 
-`npm install -g react-pod`
+`$ npm install -g react-pod`
 
 ## Usage
 
-`react-pod MyComponentName`
-
-generates
+`$ react-pod MyComponentName`
 
 ```
 MyComponentName
