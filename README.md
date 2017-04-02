@@ -41,7 +41,7 @@ export { default } from './MyComponentName';
 
 __mycomponentname.css__
 ```
-.{{mycomponentname}} {
+.mycomponentname {
 
 }
 ```
