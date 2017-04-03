@@ -1,6 +1,6 @@
 {
   "name": "react-pod",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Creates a React component pod",
   "scripts": {
     "test": "mocha --require babel-register",
@@ -15,7 +15,11 @@
       "react"
     ]
   },
-  "author": "JavaScript Playground",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dylanitorium/react-pod.git"
+  },
+  "author": "Dylan Sweetensen",
   "license": "ISC",
   "preferGlobal": true,
   "main": "dist/index.js",
